@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculated attribute ID test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Calculated attribute ID test!</h1>
+
+    <div id="linkdiv">
+
+    </div>
+    <script>
+        var products = [
+            {
+                "Product": { "Sku" : "1234", "Name": "Widget 1234" },
+                "DisplayPrice" : { "PriceWithoutVat": 4.99 }
+            },
+            {
+                "Product": { "Sku" : "2345", "Name": "Widget 2345" },
+                "DisplayPrice" : { "PriceWithoutVat": 9.99 }
+            },
+            {
+                "Product": { "Sku" : "3456", "Name": "Golden Widget 3456" },
+                "DisplayPrice" : { "PriceWithoutVat": 19.99 }
+            }
+        ];
+
+        for (var i = 0; i < products.length; i++)
+        {
+            // add links for the product
+            // image
+            var imageLink = document.createElement("a");
+            imageLink.setAttribute("href", "#");
+            imageLink.id = "hyp_image_" + products[i].Product.Sku;
+            imageLink.innerHTML="Image link for " + products[i].Product.Name;
+
+            $("#linkdiv").append(imageLink);
+            $("#linkdiv").append("<br>");
+            
+            // text
+            var textLink = document.createElement("a");
+            textLink.setAttribute("href", "#");
+            textLink.id = "hyp_text_" + products[i].Product.Sku;
+            textLink.innerHTML="Text link for " + products[i].Product.Name;
+
+            $("#linkdiv").append(textLink);
+            $("#linkdiv").append("<br>");
+
+            // add to cart
+            var addToCartLink = document.createElement("a");
+            addToCartLink.setAttribute("href", "#");
+            addToCartLink.id = "addToCart_" + products[i].Product.Sku;
+            addToCartLink.innerHTML="Add to Cart for " + products[i].Product.Name;
+
+            $("#linkdiv").append(addToCartLink);
+            $("#linkdiv").append("<br>");
+            $("#linkdiv").append("<br>");
+            
+        }
+    </script>
+
+    <!-- <a href="#" id="hyp_img_1234">Image link for 1234</a>
+    <br>
+    <a href="#" id="hyp_text_1234">Text link for 1234</a>
+    <br>
+    <a href="#" id="addToCart_1234">Add to Cart</a> -->
+
+    <br>
+    <p>Click a link to change this text!</p>
+    <script>
+    $(document).ready(function() {
+        for (var j = 0; j < products.length; j++)
+        {
+            var hypImgID = "#hyp_image_" + products[j].Product.Sku;
+            var hypTextID = "#hyp_text_" + products[j].Product.Sku;
+            var addToCartID = "#addToCart_" + products[j].Product.Sku;
+
+            $(hypImgID).click(function() {
+                $("p").html("Clicked on image link " + hypImgID + "!");
+            })
+            $(hypTextID).click(function() {
+                $("p").html("Clicked on text link for " + hypTextID + "!");
+            })
+
+            $(addToCartID).click(function() {
+                $("p").html("clicked on add to cart link for " + addToCartID + "!");
+            })
+        }        
+       
+    })
+    </script>
+</body>
+</html>
